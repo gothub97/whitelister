@@ -8,7 +8,7 @@
 
 ## 🚧 Project Status
 
-This project is **in early design phase**.  
+This project is **in early design phase**.
 We are currently defining:
 - The `TokenComplianceProfile` JSON schema
 - The core modules for contract and holder analysis
@@ -28,6 +28,80 @@ The output will be a structured JSON profile per token, designed to be LLM/agent
 
 ---
 
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Python 3.8+
+- pip (Python package installer)
+- PostgreSQL
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/whitelister.git
+    cd whitelister
+    ```
+
+2.  **Set up the environment:**
+    - Create a virtual environment (recommended):
+      ```bash
+      python -m venv venv
+      source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+      ```
+    - Create a `.env` file from the example:
+      ```bash
+      cp whitelister_backend/.env.example whitelister_backend/.env
+      ```
+    - Update `whitelister_backend/.env` with your PostgreSQL database credentials and any other necessary environment variables (e.g., RPC endpoint for Web3.py if you plan to fetch live on-chain data).
+
+3.  **Install dependencies:**
+    This project uses Poetry for managing dependencies, as defined in `pyproject.toml`. The recommended way to install dependencies is using Poetry:
+    ```bash
+    pip install poetry
+    poetry install
+    ```
+    Alternatively, if you prefer to use pip directly, you will need to manually generate a `requirements.txt` file from the `pyproject.toml` file using a full Poetry installation (`poetry export -f requirements.txt --output requirements.txt --without-hashes`) and then install using `pip install -r requirements.txt`. Please note that a `requirements.txt` is not provided in the repository.
+
+4.  **Apply database migrations:**
+    If using Poetry:
+    ```bash
+    poetry run python manage.py migrate
+    ```
+    If using pip with a virtual environment:
+    ```bash
+    python manage.py migrate
+    ```
+
+### Running the Development Server
+
+To start the Django development server:
+- If using Poetry:
+  ```bash
+  poetry run python manage.py runserver
+  ```
+- If using pip with a virtual environment:
+  ```bash
+  python manage.py runserver
+  ```
+
+The API will typically be available at `http://127.0.0.1:8000/`.
+
+### Running Tests
+
+To run the test suite:
+- If using Poetry:
+  ```bash
+  poetry run python manage.py test api
+  ```
+- If using pip with a virtual environment:
+  ```bash
+  python manage.py test api
+  ```
+
+---
+
 ## 📦 Planned Modules
 
 | Module             | Purpose                                                  |
@@ -41,13 +115,13 @@ The output will be a structured JSON profile per token, designed to be LLM/agent
 
 ---
 
-## 🛠️ Stack Preview (Planned)
+## ⚙️ Stack
 
-- **Django** — REST API interface
-- **Web3.py** — On-chain data extraction via public RPC
-- **Slither / solc** — Contract static analysis
+- **Django & Django REST Framework** — REST API interface
+- **Web3.py** — On-chain data extraction via public RPC (planned for full implementation)
+- **Slither / solc** — Contract static analysis (planned)
 - **PostgreSQL** — Structured profile storage
-- **Celery (optional)** — For async processing
+- **Celery (optional)** — For async processing (planned)
 - **Agent-compatible JSON** — For LLM workflows
 
 ---
@@ -85,5 +159,5 @@ Open issues, contribute ideas, or follow the roadmap as we build.
 
 ## 💡 Maintainer
 
-Initiated by [@gauthier_flowdesk](https://github.com/<your-handle>)  
+Initiated by [@gothub97](https://github.com/gothub97)
 Compliance + automation focused. Building with facts, not vibes.
