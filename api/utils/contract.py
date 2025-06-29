@@ -17,3 +17,9 @@ def fetch_token_metadata(token_address: str):
         "symbol": contract.functions.symbol().call(),
         "decimals": contract.functions.decimals().call()
     }
+
+def get_bytecode_for_address(address):
+    bytecode = w3.eth.get_code(Web3.to_checksum_address(address))
+    if not bytecode or bytecode == b'':  # Empty contract or error
+        raise ValueError("No bytecode found")
+    return bytecode.hex()
